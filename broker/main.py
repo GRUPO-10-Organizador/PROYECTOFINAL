@@ -1,8 +1,8 @@
 import mysql
-from manejador_db import ManejadorDB
-from usuario import Usuario
-from accion import Accion
-from operacion import Operacion
+from controllers.manejador_db import ManejadorDB
+from models.usuario import Usuario
+from models.accion import Accion
+from controllers.operacion import Operacion
 # from portafolio import Portafolio
 # from reporte import Reporte
 

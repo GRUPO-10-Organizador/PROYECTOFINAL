@@ -1,5 +1,5 @@
 import mysql.connector
-from usuario import Usuario
+from models.usuario import Usuario
 
 class ManejadorDB:
     def __init__(self, host, user, password, database):
