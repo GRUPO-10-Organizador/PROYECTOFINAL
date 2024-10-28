@@ -1,9 +1,9 @@
 class Accion:
     def __init__(self, simbolo, nombre, precio_actual, empresa_id, id=None):
-        self.id = id  # Opcional si el ID se asigna en la base de datos
+        self.id = id 
         self.__simbolo = simbolo
         self.__nombre = nombre
-        self.precio_actual = precio_actual  # Usar setter
+        self.precio_actual = precio_actual  # Usamos setter
         self.__empresa_id = empresa_id
 
     @property

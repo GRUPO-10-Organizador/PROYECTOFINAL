@@ -1,7 +1,7 @@
 class Portafolio:
     def __init__(self, usuario):
         self.__usuario = usuario
-        self.__acciones = {}  # Formato: {'ticker': (accion_obj, cantidad)}
+        self.__acciones = {}
 
     def agregar_accion(self, accion, cantidad):
         if cantidad > 0:

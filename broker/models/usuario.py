@@ -1,6 +1,6 @@
 class Usuario:
     def __init__(self, id_usuario=None, nombre=None, email=None, saldo_inicial=0):
-        self.__id = id_usuario  # ID puede ser None si no se proporciona
+        self.__id = id_usuario  # La ID puede ser None si no se proporciona
         self.__email = email
         self.__nombre = nombre
         self.__saldo = saldo_inicial

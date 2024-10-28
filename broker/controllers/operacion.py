@@ -37,18 +37,16 @@ class Operacion:
         return self.__cantidad * self.__precio_unitario
 
     def validar_operacion(self, manejador_db):
-        # Lógica para validar la operación, por ejemplo:
-        # 1. Comprobar si el usuario existe
+        # Comprobacion si el usuario existe
         if not manejador_db.verificar_usuario_existente(self.__usuario_id):
             raise ValueError("Usuario no existe.")
         
-        # 2. Comprobar si la acción existe
+        # 2. Comprobacion si la acción existe
         if not manejador_db.verificar_accion_existente(self.__accion_id):
             raise ValueError("Acción no existe.")
-
-        # 3. Aquí podrías agregar más validaciones según sea necesario
-        # Por ejemplo, comprobar si el usuario tiene suficiente saldo para una compra
-        return True  # Retorna True si la operación es válida
+        
+        #Comprobar si el usuario tiene suficiente saldo para una compra
+        return True  #Retorna True si la operación es válida
 
     def __str__(self):
         return (f"Operación: {self.__tipo}, Usuario ID: {self.__usuario_id}, "
