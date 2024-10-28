@@ -7,13 +7,14 @@ Este proyecto tiene como objetivo crear una aplicación que funcione como interm
 La empresa tecnológica ISPC Cba ha solicitado la creación de una aplicación para realizar transacciones en el mercado de valores, atendiendo a inversores individuales y corporativos.
 
 ## Alcance
-La primera etapa de la aplicación contará con funcionalidades básicas como:
-1. Saldo inicial de $1.000.000 para nuevos usuarios.
-2. Consulta de cotizaciones de acciones argentinas.
-3. Compra y venta de acciones a precio de mercado.
-4. Panel "Mi Portafolio" que muestra el saldo y las acciones compradas.
-5. Operación en pesos argentinos con decimales.
-6. Cálculo de una comisión del 1.5% por operación.
+La plataforma está diseñada para cumplir con las siguientes funcionalidades:
+- Registro y autenticación de usuarios, cada uno con una cuenta demo inicial.
+- Gestión de cuentas para el seguimiento de saldo, ganancias y pérdidas.
+- Simulación de operaciones de compra y venta de acciones del mercado MERVAL, manteniendo un registro detallado de cada operación.
+- Visualización de cotizaciones en tiempo real y detalles relevantes de las acciones.
+- Generación de reportes básicos de ganancia/pérdida y análisis de portafolio.
+
+Es importante destacar que esta plataforma es solo una simulación educativa y no realiza operaciones reales en el mercado. Su uso está limitado a fines académicos y demostrativos.
 
 ## Autores
 - Agustin Ceballos - Agustin197
