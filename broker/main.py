@@ -3,7 +3,8 @@ from controllers.manejador_db import ManejadorDB
 from models.usuario import Usuario
 from models.accion import Accion
 from controllers.operacion import Operacion
-
+# from portafolio import Portafolio
+# from reporte import Reporte
 
 def mostrar_menu():
     print("\n" + "="*30)
@@ -75,7 +76,7 @@ def iniciar():
             simbolo = input("Ingrese símbolo de la acción (ej: TSLA): ")
             nombre = input("Ingrese nombre de la acción (ej: Tesla): ")
 
-            # Validamos precio actual de la acción
+            # Validar precio actual de la acción
             while True:
                 try:
                     precio_actual = float(input("Ingrese precio actual: "))
@@ -86,7 +87,7 @@ def iniciar():
                 except ValueError:
                     print("Entrada inválida. Por favor, ingrese un número válido para el precio.")
 
-            # Validamos que el usuario ingrese un ID de empresa sin permitir campo vacío
+            # Validar que el usuario ingrese un ID de empresa sin permitir campo vacío
             while True:
                 empresa_id = input("Ingrese ID de la empresa (no puede estar vacío): ")
                 if empresa_id.strip():  # Verifica que no esté vacío
@@ -98,7 +99,7 @@ def iniciar():
                 else:
                     print("Error: No se puede dejar el ID de empresa en blanco. Por favor, ingrese un ID.")
 
-            # Verificamos si la empresa existe
+            # Verificar si la empresa existe
             if not manejador_db.verificar_empresa_existente(empresa_id):
                 print(f"Error: La empresa con ID '{empresa_id}' no existe.")
                 crear_empresa = input("¿Desea crear una nueva empresa con este ID? (s/n): ").lower()
@@ -141,7 +142,7 @@ def iniciar():
                 usuario_id = int(input("Ingrese ID de usuario: "))
                 if not manejador_db.verificar_usuario_existente(usuario_id):
                     print(f"El usuario con ID {usuario_id} no existe.")
-                    continue
+                    continue  # Permite seguir sin redirigir
 
                 id_accion = int(input("Ingrese ID de la acción: "))
                 if not manejador_db.verificar_accion_existente(id_accion):

@@ -1,5 +1,7 @@
 from datetime import datetime
 
+#DEVUELVE: ID de Transacción, Usuario ID, Acción ID, Tipo de Operación, Cantidad, Precio, Fecha y Hora.
+
 class Reporte:
     def __init__(self):
         self.__fecha_generacion = datetime.now()
@@ -7,7 +9,7 @@ class Reporte:
     def generar_resumen(self, portafolio):
         resumen = f"Reporte de Portafolio - {self.__fecha_generacion.strftime('%Y-%m-%d %H:%M:%S')}\n"
         resumen += "-----------------------------------------\n"
-        total_valor = 0  # Inicializamos el valor total
+        total_valor = 0  # Inicializa el valor total
         for ticker, cantidad in portafolio.acciones.items():
             accion = portafolio.obtener_accion(ticker)
             valor_accion = accion.precio_actual * cantidad

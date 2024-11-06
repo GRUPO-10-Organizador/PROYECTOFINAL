@@ -60,6 +60,34 @@ class ManejadorDB:
                  "VALUES (%s, %s, %s, %s, %s)")
         self.cursor.execute(query, (operacion.usuario_id, operacion.accion_id, operacion.tipo, operacion.cantidad, operacion.precio_unitario))
         self.conexion.commit()
+        # Actualizar el portafolio del usuario
+        self.actualizar_portafolio(operacion)
+
+    def actualizar_portafolio(self, operacion):
+        # Obtener la cantidad actual de la acción en el portafolio del usuario
+        self.cursor.execute("SELECT cantidad FROM Portafolio WHERE usuario_id = %s AND accion_id = %s", (operacion.usuario_id, operacion.accion_id))
+        resultado = self.cursor.fetchone()
+        
+        cantidad_actual = resultado[0] if resultado else 0
+        # Calcular la nueva cantidad
+        if operacion.tipo == "compra":
+            nueva_cantidad = cantidad_actual + operacion.cantidad
+        elif operacion.tipo == "venta":
+            nueva_cantidad = cantidad_actual - operacion.cantidad
+
+        # Validar que la cantidad no sea negativa
+        if nueva_cantidad < 0:
+            raise ValueError("Operación no válida: el usuario no tiene suficientes acciones para vender.")
+
+        # Insertar o actualizar el registro en `Portafolio`
+        if resultado:
+            # Actualizar si la acción ya está en el portafolio del usuario
+            self.cursor.execute("UPDATE Portafolio SET cantidad = %s WHERE usuario_id = %s AND accion_id = %s", (nueva_cantidad, operacion.usuario_id, operacion.accion_id))
+        else:
+            # Insertar si es una nueva acción en el portafolio del usuario
+            self.cursor.execute("INSERT INTO Portafolio (usuario_id, accion_id, cantidad) VALUES (%s, %s, %s)", (operacion.usuario_id, operacion.accion_id, nueva_cantidad))
+
+        self.conexion.commit()
 
     def obtener_precio_accion(self, id_accion):
         self.cursor.execute("SELECT precio_actual FROM accion WHERE id = %s", (id_accion,))
@@ -109,25 +137,13 @@ class ManejadorDB:
 
     def obtener_portafolio(self, usuario_id):
         try:
-            self.cursor.execute("SELECT accion_id, cantidad FROM operacion WHERE usuario_id = %s", (usuario_id,))
+            self.cursor.execute("SELECT accion_id, cantidad FROM Portafolio WHERE usuario_id = %s", (usuario_id,))
             resultado = self.cursor.fetchall()
             print("Resultado de la consulta:", resultado)
             return resultado
         except Exception as e:
             print("Error al obtener el portafolio:", e)
             return []
-
-    def generar_reporte_financiero(self):
-        try:
-            usuario_id = input("Ingrese ID de usuario para generar el reporte: ")
-        
-            if not usuario_id:
-                print("Debes ingresar un ID de usuario válido.")
-                return     
-            print(f"Generando reporte financiero para el usuario con ID: {usuario_id}")
-        
-        except Exception as e:
-            print(f"Ocurrió un error: {e}")
 
     def cerrar_conexion(self):
         if self.cursor:
